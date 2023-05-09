@@ -1,11 +1,6 @@
 import './Form.scss';
 import { useState } from 'react';
-/* 
 
-On submit:
-Send the Form entries back to the <App /> using the method sent down in props.
-Form will run the API request.
-Toggle the “loading” status before and after the request.} */
 function Form({ handleApiCall }) {
   const [url, setUrl] = useState(null);
   const [method, setMethod] = useState(null);
@@ -24,7 +19,6 @@ function Form({ handleApiCall }) {
   const handleInput = (event) => {
     let name = event.target.name;
     let value = event.target.value;
-    // let {name, value} =  event.target;
     if (name === 'url') {
       setUrl(value);
     }
@@ -46,7 +40,7 @@ function Form({ handleApiCall }) {
           <input data-testid="url-input" name="url" type='text' placeholder="URL goes here" onChange={handleInput} />
           <button type="submit">GO!</button>
         </label>
-        <select id="HTMLmethods" name="methods" onChange={handleInput}>
+        <select data-testid="HTMLmethods" name="methods" onChange={handleInput}>
           <option value="get">GET</option>
           <option value="post">POST</option>
           <option value="put">PUT</option>

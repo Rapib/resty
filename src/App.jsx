@@ -6,21 +6,13 @@ import Form from './Components/Form';
 import Results from './Components/Results';
 import { useState } from 'react';
 
+
 function App (){
-  // const [notes, setNotes] = useState([]);
-  // const createNote = (title, text) => {
-  //   if (!title || !text) {
-  //     console.error('Bad Note');
-  //   } else {
-  //     setNotes([...notes, new Note(title, text)]);
-  //   }
-  // }
 
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
 
   let callApi = (requestParams) => {
-    // mock output
     const data = {
       count: 2,
       results: [
