@@ -6,7 +6,7 @@ function Results ({data}){
 
   return (
     <section>
-      <JsonView src={data} />
+      <pre data-testid="results"><JsonView src={data} /></pre>
       {/* <pre data-testid="results">{data ? JSON.stringify(data, undefined, 2) : null}</pre> */}
     </section>
   );

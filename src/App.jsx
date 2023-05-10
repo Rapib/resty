@@ -25,10 +25,6 @@ function App() {
 
   let callApi = async (requestParams) => {
     setLoad(true);
-    // const response = await fetch(requestParams.url);
-    // const jsonData = await response.json();
-    // setData(jsonData);
-    // setLoad(false);
     setRequestParams(requestParams);
   }
 
