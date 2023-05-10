@@ -1,9 +1,13 @@
 import './Results.scss';
+// import { useState } from 'react';
 
-function Results (props){
+function Results ({data}){
+
+  // const [load, setLoad] = useState(true);
   return (
     <section>
-      <pre>{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
+
+      <pre data-testid="results">{data ? JSON.stringify(data, undefined, 2) : 'Loading'}</pre>
     </section>
   );
 }
