@@ -2,9 +2,12 @@ import './Form.scss';
 import { useState } from 'react';
 
 function Form({ handleApiCall }) {
+
+
   const [url, setUrl] = useState(null);
-  const [method, setMethod] = useState(null);
+  const [method, setMethod] = useState('get');
   const [json, setJson] = useState(null);
+
   let handleSubmit = e => {
     e.preventDefault();
     console.log(e.target);
