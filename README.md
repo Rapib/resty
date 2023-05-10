@@ -9,7 +9,7 @@
 
 # Live Site
 
- [Live link](https://notthunderclient.netlify.app/).
+ [Live link](https://notthunderclient.netlify.app/)
 
 ## Available Scripts
 
