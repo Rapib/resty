@@ -7,9 +7,9 @@
 ![lab26](lab26.jpg)
 
 
-# Getting Started with Create React App
+# Live Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ [Live link](https://notthunderclient.netlify.app/).
 
 ## Available Scripts
 
