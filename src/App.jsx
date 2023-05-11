@@ -4,41 +4,42 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
-import { useState, useEffect , useReducer } from 'react';
+import { useEffect , useReducer } from 'react';
 import History from './Components/History';
-
-// Use a reducer to store and manage all application state: loading, results, history.
-// Add to history array in state after every api call
-// method, url, results (json).
 
 function App() {
 
   const initialState = {
-    count: 0,
     load: false,
-    data: null,
+    data: [],
+    result: null,
     requestParams: {},
-    history: []
+    history: [],
+    ans: null,
   }
   
   const reducer = (state, action) => {
     switch(action.type) {
-      // case 'addHistory':
-      //   return {
-      //     count: state.count + 1,
-      //     history: [...state.history, action.payload],
-
-      //   }
-      case "removeHistory":
-        return {
-          count: state.count - 1,
-          history: state.history.filter(history => (history !== action.payload)),
+      case 'addData':
+        return {...state,
+          data: [...state.data, action.payload],
+          result: action.payload,
         }
         case 'addReq':
-          return {
+          return {...state,
             requestParams: action.payload,
             history: [...state.history, action.payload],
           }
+        case 'histResult':
+          return {
+            ...state, 
+            ans: action.payload,
+          }
+          case 'load':
+            return {
+              ...state, 
+              load: action.payload,
+            }
       default:
         return state
     }
@@ -46,45 +47,55 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // const addHistory = (history) => {
-  //   console.log('hit add history');
-  //   dispatch( {
-  //     type: 'addHistory',
-  //     payload: history
-  //   });
+  const histResult = (ans) => {
+    dispatch( {
+      type: 'histResult',
+      payload: ans
+    });
+  }
 
-  // }
-
+  const load = (load) => {
+    dispatch( {
+      type: 'load',
+      payload: load
+    });
+  }
   const addReq = (requestParams) => {
-    // addHistory(requestParams);
+    load(true);
     dispatch( {
       type: 'addReq',
       payload: requestParams
     });
   }
 
+  const addData = (result) => {
+    console.log('hii');
+    dispatch( {
+      type: 'addData',
+      payload: result
+    });
+  }
 
-
-  const [data, setData] = useState(null);
-  // const [requestParams, setRequestParams] = useState({});
-  const [load, setLoad] = useState(false);
   useEffect(() => {
     
     async function getJSON(requestParams) {
       const response = await fetch(requestParams.url);
       const jsonData = await response.json();
-      setData(jsonData);
-      setLoad(false);
+      addData(jsonData);
+      load(false);
+
     }
+    console.log(state.requestParams);
     getJSON(state.requestParams);
-    // callApi(requestParams);
+
 
   }, [state.requestParams]);
 
-  let callApi = async (requestParams) => {
-    setLoad(true);
-    // addHistory(requestParams);
-    // setRequestParams(requestParams);
+  function findResult (req){
+    let idx = state.history.indexOf(req);
+    let result = state.data[idx];
+    histResult(result);
+    return result;
   }
 
   return (
@@ -96,9 +107,9 @@ function App() {
           <div>URL: {state.requestParams.url}</div>
           <div>JSON: {state.requestParams.json}</div>
         </>}
-      <Form handleApiCall={callApi} addReq={addReq} />
-      {load ? 'Loading...' : <Results data={data} />}
-      <History history={state.history} addReq={addReq} />
+      <Form addReq={addReq} />
+      {state.load ? 'Loading...' : <Results result={state.result} ans={state.ans} />}
+      <History history={state.history} findResult={findResult} />
       <Footer />
     </React.Fragment>
   );
