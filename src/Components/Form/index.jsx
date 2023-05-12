@@ -1,7 +1,7 @@
 import './Form.scss';
 import { useState } from 'react';
 
-function Form({ handleApiCall }) {
+function Form({ addReq }) {
 
 
   const [url, setUrl] = useState(null);
@@ -16,7 +16,7 @@ function Form({ handleApiCall }) {
       url: url,
       json: JSON.stringify(json),
     };
-    handleApiCall(formData);
+    addReq(formData);
   }
 
   const handleInput = (event) => {
