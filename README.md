@@ -1,5 +1,8 @@
 # UML
 
+## lab29
+![lab29](lab29.jpg)
+
 ## lab28
 ![lab28](lab28.jpg)
 
